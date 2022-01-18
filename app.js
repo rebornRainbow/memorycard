@@ -9,6 +9,11 @@
 
 class App {
   constructor() {
+
+    //绑定函数
+    this.click_choices = this.click_choices.bind(this);
+    this.click_choices_event = this.click_choices_event.bind(this);
+
     const menuElement = document.querySelector('#menu');
     this.menu = new MenuScreen(menuElement);
 
@@ -18,6 +23,7 @@ class App {
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
 
+    this.click_choices();
     // Uncomment this pair of lines to see the "flashcard" screen:
     // this.menu.hide();
     // this.flashcards.show();
@@ -26,4 +32,23 @@ class App {
     // this.menu.hide();
     // this.results.show();
   }
+
+  //菜单里面的元素加上监听事件
+  click_choices()
+  {
+    let click_items = document.querySelectorAll('#choices div');
+    for(let item of click_items)
+    {
+      item.addEventListener('click',this.click_choices_event);
+    }
+  }
+  
+  click_choices_event(event)
+  {
+    let elem = event.currentTarget;
+    let card_set_index = elem.dataset.index;
+    this.menu.hide();
+    this.flashcards.show(card_set_index);
+  }
+
 }

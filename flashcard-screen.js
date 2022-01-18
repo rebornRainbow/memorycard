@@ -12,10 +12,15 @@ class FlashcardScreen {
     this.containerElement = containerElement;
   }
 
-  show() {
+  show(card_set_index) {
     this.containerElement.classList.remove('inactive');
     const flashcardContainer = document.querySelector('#flashcard-container');
-    const card = new Flashcard(flashcardContainer, 'word', 'definition');
+    //记录本次的单词集合
+    this.words = FLASHCARD_DECKS[card_set_index]['words'];
+    this.key = Object.keys(this.words);
+    this.cur_card_index = 0;
+    const card = new Flashcard(flashcardContainer, this.key[this.cur_card_index], 
+      this.words[this.key[this.cur_card_index]]);
   }
 
   hide() {
