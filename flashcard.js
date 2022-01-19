@@ -14,7 +14,7 @@ class Flashcard {
 
     this.flashcardElement = this._createFlashcardDOM(frontText, backText);
     this.containerElement.append(this.flashcardElement);
-
+    this.wordshow = true;
     this.flashcardElement.addEventListener('pointerup', this._flipCard);
   }
 
@@ -40,11 +40,13 @@ class Flashcard {
     wordSide.classList.add('flashcard');
     wordSide.classList.add('word');
     wordSide.textContent = frontText;
+    this.word = wordSide;
 
     const definitionSide = document.createElement('div');
     definitionSide.classList.add('flashcard');
     definitionSide.classList.add('definition');
     definitionSide.textContent= backText;
+    this.def = definitionSide;
 
     cardContainer.appendChild(wordSide);
     cardContainer.appendChild(definitionSide);
@@ -52,6 +54,8 @@ class Flashcard {
   }
 
   _flipCard(event) {
+    //切换
     this.flashcardElement.classList.toggle('show-word');
+    this.wordshow = !this.wordshow;
   }
 }

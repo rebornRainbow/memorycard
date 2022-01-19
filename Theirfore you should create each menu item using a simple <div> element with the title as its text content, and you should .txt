@@ -1,1 +1,0 @@
-Theirfore you should create each menu item using a simple <div> element with the title as its text content, and you should append these <div> elements to the <div id="choices"></div> container.

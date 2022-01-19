@@ -13,12 +13,17 @@ class App {
     //绑定函数
     this.click_choices = this.click_choices.bind(this);
     this.click_choices_event = this.click_choices_event.bind(this);
+    this.change_to_res = this.change_to_res.bind(this);
+    this.continue_card = this.continue_card.bind(this);
 
     const menuElement = document.querySelector('#menu');
     this.menu = new MenuScreen(menuElement);
-
+    
     const mainElement = document.querySelector('#main');
     this.flashcards = new FlashcardScreen(mainElement);
+
+    document.addEventListener('change_to_res',this.change_to_res);
+    document.addEventListener('continue_card',this.continue_card);
 
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
@@ -33,6 +38,18 @@ class App {
     // this.results.show();
   }
 
+
+  continue_card()
+  {
+    this.results.hide();
+    this.flashcards.show(0,true);
+  }
+
+  change_to_res()
+  {
+    let tem = this.flashcards.hide();
+    this.results.show();
+  }
   //菜单里面的元素加上监听事件
   click_choices()
   {
@@ -48,7 +65,7 @@ class App {
     let elem = event.currentTarget;
     let card_set_index = elem.dataset.index;
     this.menu.hide();
-    this.flashcards.show(card_set_index);
+    this.flashcards.show(card_set_index,false);
   }
 
 }
