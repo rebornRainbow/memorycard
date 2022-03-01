@@ -15,6 +15,7 @@ class App {
     this.click_choices_event = this.click_choices_event.bind(this);
     this.change_to_res = this.change_to_res.bind(this);
     this.continue_card = this.continue_card.bind(this);
+    this.back_menu = this.back_menu.bind(this);
 
     const menuElement = document.querySelector('#menu');
     this.menu = new MenuScreen(menuElement);
@@ -24,9 +25,14 @@ class App {
 
     document.addEventListener('change_to_res',this.change_to_res);
     document.addEventListener('continue_card',this.continue_card);
+  
+
 
     const resultElement = document.querySelector('#results');
     this.results = new ResultsScreen(resultElement);
+
+
+    document.addEventListener('back_menu',this.back_menu);
 
     this.click_choices();
     // Uncomment this pair of lines to see the "flashcard" screen:
@@ -38,6 +44,11 @@ class App {
     // this.results.show();
   }
 
+  back_menu()
+  {
+    this.results.hide();
+    this.menu.show();
+  }
 
   continue_card()
   {

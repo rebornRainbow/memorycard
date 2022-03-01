@@ -25,7 +25,7 @@ class Flashcard {
   //
   // More specifically, this creates the following HTML snippet in JS
   // as a DOM object:
-  // <div class="flashcard-box show-word">
+  // <div class="flas hcard-box show-word">
   //   <div class="flashcard word">frontText</div>
   //   <div class="flashcard definition">backText</div>
   // </div>

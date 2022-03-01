@@ -32,14 +32,25 @@ class FlashcardScreen {
 
     if(iscontinual === false)
     {
+      document.querySelector('#flashcard-container').innerHTML = '';
+      this.wrong_num = 0;
+      this.right_num = 0;
       this.first_show(card_set_index);
     }else
     {
       //继续错误的归0
-      this.wrong_num = 0;
-      this.key_length = this.key.length;
-      this.show_res();
-      this.go_to_next();
+      if(this.wrong_num !== 0)
+      {
+        this.wrong_num = 0;
+        this.key_length = this.key.length;
+        this.show_res();
+        this.go_to_next();
+      }else{
+        document.querySelector('#flashcard-container').innerHTML = '';
+        this.wrong_num = 0;
+        this.right_num = 0;
+        this.first_show(this.card_set_index);
+      }
     }
 
 
@@ -49,10 +60,11 @@ class FlashcardScreen {
 
   first_show(card_set_index)
   {
+    this.card_set_index = card_set_index;
     const flashcardContainer = document.querySelector('#flashcard-container');
     this.flashcardContainer = flashcardContainer;
     //记录本次的单词集合
-    this.words = FLASHCARD_DECKS[card_set_index]['words'];
+    this.words = FLASHCARD_DECKS[this.card_set_index]['words'];
     this.key = Object.keys(this.words);
     this.key_length = this.key.length;
     this.cur_card_index = 0;
@@ -104,6 +116,7 @@ class FlashcardScreen {
       /************************结束了 */
       document.dispatchEvent(new CustomEvent('change_to_res'));
       --this.cur_card_index;
+      return;
     }
     this.card.word.textContent = this.key[this.cur_card_index];
     this.card.def.textContent = this.words[this.card.word.textContent];
